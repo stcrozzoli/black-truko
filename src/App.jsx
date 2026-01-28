@@ -1,120 +1,145 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import fosforoimg from './assets/fosforo.png'
+import { useState } from "react";
+import "./App.css";
+import fosforoimg from "./assets/fosforo.png";
+import Settings from "./Settings";
 
 function App() {
-  const [countNosotros, setCountNosotros] = useState(0)
-  const [countEllos, setCountEllos] = useState(0)
-  const [hastaCuanto, setHastaCuanto] = useState(30)
-  const [fosforo, setFosforo] = useState([])
+ const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const toggleSettings = () => {
+    setIsSettingsOpen((prevState) => !prevState);
+  };
+  //----------------
 
-  const [grupo, setGrupo] = useState([])
+  const [countNosotros, setCountNosotros] = useState(0);
+  const [countEllos, setCountEllos] = useState(0);
+  const [hastaCuanto, setHastaCuanto] = useState(30);
 
-  const agregarFosforo = () => {
-    setFosforo(prev => [...prev, {}]);
+  const esImpar = hastaCuanto % 2 !== 0;
+  const limiteMalas = Math.floor(hastaCuanto / 2);
+
+  // ================= TEXTO =================
+  const sonMalasNosotros = esImpar || countNosotros <= limiteMalas;
+  const sonMalasEllos = esImpar || countEllos <= limiteMalas;
+
+  // ================= FÓSFOROS =================
+  const fosforosNosotros = esImpar
+    ? countNosotros
+    : sonMalasNosotros
+    ? countNosotros
+    : countNosotros - limiteMalas;
+
+  const fosforosEllos = esImpar
+    ? countEllos
+    : sonMalasEllos
+    ? countEllos
+    : countEllos - limiteMalas;
+
+  const renderFosforos = (cantidad, claseGrupo) =>
+    Array.from({ length: Math.ceil(cantidad / 5) }).map((_, grupoIndex) => {
+      const enGrupo = Math.min(5, cantidad - grupoIndex * 5);
+
+      return (
+        <div key={grupoIndex} className={claseGrupo}>
+          {Array.from({ length: enGrupo }).map((_, i) => (
+            <img
+              key={i}
+              src={fosforoimg}
+              className={`fosforo fosforo${i + 1}`}
+              alt="fosforo"
+            />
+          ))}
+        </div>
+      );
+    });
+
+  // ================= HANDLERS =================
+  const sumarNosotros = () => {
+    if (countNosotros >= hastaCuanto) return;
+    setCountNosotros((c) => c + 1);
   };
 
-  const quitarFosforo = () => {
-    setFosforo(prev => prev.slice(0, -1))
-  }
-
-  /*SECCION 2 NUEVO PARA GRUPO ELLOS*/
-  const [fosforo2, setFosforo2] = useState([])
-
-  const [grupo2, setGrupo2] = useState([])
-
-  const agregarFosforo2 = () => {
-    setFosforo2(prev => [...prev, {}]);
+  const sumarEllos = () => {
+    if (countEllos >= hastaCuanto) return;
+    setCountEllos((c) => c + 1);
   };
-
-  const quitarFosforo2 = () => {
-    setFosforo2(prev => prev.slice(0, -1))
-  }
-
-/*FIN SECCION 2*/
 
   return (
-    <div className='contenedorPrincipal'>
-
-      <div className='pantallaPuntos'>
-        <div><span className='black'>BLACK</span></div>
-        <div><button className='aCuanto'>{hastaCuanto}</button></div>
-        <div><span className='truko'>TRUKO</span></div>
+    <div className="contenedorPrincipal">
+      <div className="pantallaPuntos">
+        <span className="black">BLACK</span>
+        <button className="aCuanto" onClick={toggleSettings}>
+          {hastaCuanto}
+        </button>
+        <span className="truko">TRUKO</span>
       </div>
 
-      <div className='cajaJuego'>
-        <div className='nosotros'>
-          <p>Nosotros</p>
-          <div className='fosforosNosotros'>
-            {Array.from({ length: Math.ceil(fosforo.length / 5) }).map((_, grupoIndex) => {
-              // Calculamos los fósforos que van en este grupo
-              const fosforosEnGrupo = fosforo.slice(grupoIndex * 5, grupoIndex * 5 + 5);
-
-              return (
-                <div key={grupoIndex} className='grupo'>
-                  {fosforosEnGrupo.map((_, fosforoIndex) => {
-                    const numeroClase = fosforoIndex + 1; // Para clases fosforo1, fosforo2...
-                    return (
-                      <img
-                        key={fosforoIndex}
-                        src={fosforoimg}
-                        className={`fosforo fosforo${numeroClase}`}
-                        alt="fosforo"
-                      />
-                    );
-                  })}
-                </div>
-              );
-            })}
+      <div className="cajaJuego">
+        {/* ================= NOSOTROS ================= */}
+        <div className="nosotros">
+          <div className="divNemb">
+            <p className="nosotrosText">Nosotros</p>
+            <p className="sonMalas">
+              {countNosotros}
+              {esImpar || sonMalasNosotros ? " malas ❌" : " buenas ✅"}
+            </p>
           </div>
+
+          <div className="fosforosNosotros">
+            {renderFosforos(fosforosNosotros, "grupo")}
+          </div>
+
           <p>{countNosotros}</p>
-          <div className='botonesPuntos'>
-            <button className='botonSumar' onClick={() => { setCountNosotros(countNosotros + 1); agregarFosforo() }}>+</button>
-            <button className='botonRestar' onClick={() => { setCountNosotros(prev => Math.max(0, prev - 1)); quitarFosforo() }}>-</button>
+
+          <div className="botonesPuntos">
+            <button className="botonSumar" onClick={sumarNosotros}>
+              +
+            </button>
+            <button
+              className="botonRestar"
+              onClick={() => setCountNosotros((c) => Math.max(0, c - 1))}
+            >
+              -
+            </button>
           </div>
         </div>
-        <div className='ellos'>
-          <p>Ellos</p>
 
-          <div className='fosforosEllos'>
-            {Array.from({ length: Math.ceil(fosforo2.length / 5) }).map((_, grupoIndex) => {
-              // Calculamos los fósforos que van en este grupo
-              const fosforosEnGrupo = fosforo2.slice(grupoIndex * 5, grupoIndex * 5 + 5);
-
-              return (
-                <div key={grupoIndex} className='grupo2'>
-                  {fosforosEnGrupo.map((_, fosforoIndex) => {
-                    const numeroClase = fosforoIndex + 1; // Para clases fosforo1, fosforo2...
-                    return (
-                      <img
-                        key={fosforoIndex}
-                        src={fosforoimg}
-                        className={`fosforo fosforo${numeroClase}`}
-                        alt="fosforo"
-                      />
-                    );
-                  })}
-                </div>
-              );
-            })}
+        {/* ================= ELLOS ================= */}
+        <div className="ellos">
+          <div className="divNemb">
+            <p className="ellosText">Ellos</p>
+            <p className="sonMalas">
+              {countEllos}
+              {esImpar || sonMalasEllos ? " malas ❌" : " buenas ✅"}
+            </p>
           </div>
 
-
-
-
-
+          <div className="fosforosEllos">
+            {renderFosforos(fosforosEllos, "grupo2")}
+          </div>
 
           <p>{countEllos}</p>
-          <div className='botonesPuntos'>
-            <button className='botonSumar' onClick={() => { setCountEllos(countEllos + 1); agregarFosforo2() }}>+</button>
-            <button className='botonRestar' onClick={() => { setCountEllos(prev => Math.max(0, prev - 1)); quitarFosforo2() }}>-</button>
+
+          <div className="botonesPuntos">
+            <button className="botonSumar" onClick={sumarEllos}>
+              +
+            </button>
+            <button
+              className="botonRestar"
+              onClick={() => setCountEllos((c) => Math.max(0, c - 1))}
+            >
+              -
+            </button>
           </div>
         </div>
       </div>
-
-
+      {isSettingsOpen && (
+        <Settings
+          onClose={toggleSettings}
+          setHastaCuanto={setHastaCuanto} 
+        />
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

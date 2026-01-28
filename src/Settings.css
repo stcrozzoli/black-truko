@@ -1,0 +1,53 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgba(255, 0, 238, 0.37);
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  text-align: center;
+    font-family: "Asimovian", sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  color: white;
+
+}
+
+.cerrar, .fullScreen{
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+select{
+    padding: 10px 20px; /* Aumenta el tamaño del select */
+  font-size: 18px; /* Fuente más grande */
+  border-radius: 8px; /* Bordes redondeados */
+  border: 2px solid #3498db; /* Borde con color */
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333333; /* Color del texto */
+  cursor: pointer;
+  appearance: none; /* Elimina la apariencia predeterminada del select en algunos navegadores */
+  -webkit-appearance: none; /* Elimina la apariencia predeterminada en Safari */
+  -moz-appearance: none; /* Elimina la apariencia predeterminada en Firefox */
+  transition: all 0.3s ease; /* Transición suave para el efecto hover */
+  outline: none; /* Quita el contorno al hacer foco */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
