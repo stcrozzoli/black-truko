@@ -12,7 +12,7 @@ body {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  min-height: calc(100vh - 80px);;
+  min-height: calc(100vh - 100px);;
 }
 
 .pantallaPuntos {
