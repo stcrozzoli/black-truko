@@ -1,9 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import "./App.css";
 import fosforoimg from "./assets/fosforo.png";
 import Settings from "./Settings";
 
 function App() {
+  useEffect(() => {
+    // Ajusta la altura del viewport dinámicamente
+    const adjustHeight = () => {
+      const vh = window.innerHeight * 0.01; // 1% del viewport
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    // Llamar la función para ajustar la altura al cargar la página y cuando se redimensione
+    window.addEventListener('resize', adjustHeight);
+    window.addEventListener('load', adjustHeight);
+
+    // Limpiar los event listeners cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('resize', adjustHeight);
+      window.removeEventListener('load', adjustHeight);
+    };
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const toggleSettings = () => {
     setIsSettingsOpen((prevState) => !prevState);

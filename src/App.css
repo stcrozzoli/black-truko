@@ -1,3 +1,8 @@
+.contenedorPrincipal {
+  height: calc(var(--vh, 1vh) * 100);  /* Esto usa el valor calculado del viewport */
+  overflow: hidden; /* Opcional: evita el scroll en la página completa */
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -13,6 +18,7 @@ body {
   margin: 0px;
   padding: 0px;
   min-height: 100vh;
+  height: auto;
 }
 
 .pantallaPuntos {
@@ -105,10 +111,11 @@ body {
   font-weight: bold;
   cursor: pointer;
   margin: 10px;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  background-color: rgb(163, 163, 163);
 
   transition:
     transform 0.1s ease,
