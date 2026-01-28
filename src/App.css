@@ -1,8 +1,3 @@
-.contenedorPrincipal {
-  height: calc(var(--vh, 1vh) * 100);  /* Esto usa el valor calculado del viewport */
-  overflow: hidden; /* Opcional: evita el scroll en la página completa */
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -17,8 +12,7 @@ body {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  min-height: 100vh;
-  height: auto;
+  min-height: calc(100vh - 60px);;
 }
 
 .pantallaPuntos {
