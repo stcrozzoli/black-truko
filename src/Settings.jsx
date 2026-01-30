@@ -22,7 +22,6 @@ function Settings({ onClose, setHastaCuanto, hastaCuanto  }) {
             </select>
           </div>
           <div className="divCerrar">
-            {/* Este botón usa la prop onClose para cerrar el modal */}
             <button className="cerrar" onClick={onClose}>
               Cerrar
             </button>
