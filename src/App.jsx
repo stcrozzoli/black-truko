@@ -62,6 +62,7 @@ function App() {
   };
 
   return (
+
     <div className="contenedorPrincipal">
       <div className="pantallaPuntos">
         <span className="black">BLACK</span>
@@ -72,21 +73,15 @@ function App() {
       </div>
 
       <div className="cajaJuego">
-        {/* ================= NOSOTROS ================= */}
         <div className="nosotros">
           <div className="divNemb">
             <p className="nosotrosText">Nosotros</p>
             <p className="sonMalas">
               {countNosotros}
-              {esImpar || sonMalasNosotros ? " malas ❌" : " buenas ✅"}
+              {esImpar || sonMalasNosotros ? " Malas ❌" : " Buenas ✅"}
             </p>
           </div>
 
-          <div className="fosforosNosotros">
-            {renderFosforos(fosforosNosotros, "grupo")}
-          </div>
-
-          <p>{countNosotros}</p>
 
           <div className="botonesPuntos">
             <button className="botonSumar" onClick={sumarNosotros}>
@@ -99,23 +94,22 @@ function App() {
               -
             </button>
           </div>
+
+          <div className="fosforosNosotros">
+            {renderFosforos(fosforosNosotros, "grupo")}
+          </div>
         </div>
 
-        {/* ================= ELLOS ================= */}
+
         <div className="ellos">
           <div className="divNemb">
             <p className="ellosText">Ellos</p>
             <p className="sonMalas">
               {countEllos}
-              {esImpar || sonMalasEllos ? " malas ❌" : " buenas ✅"}
+              {esImpar || sonMalasEllos ? " Malas ❌" : " Buenas ✅"}
             </p>
           </div>
 
-          <div className="fosforosEllos">
-            {renderFosforos(fosforosEllos, "grupo2")}
-          </div>
-
-          <p>{countEllos}</p>
 
           <div className="botonesPuntos">
             <button className="botonSumar" onClick={sumarEllos}>
@@ -128,12 +122,21 @@ function App() {
               -
             </button>
           </div>
+
+
+
+          <div className="fosforosEllos">
+            {renderFosforos(fosforosEllos, "grupo2")}
+          </div>
+
+
         </div>
       </div>
       {isSettingsOpen && (
         <Settings
           onClose={toggleSettings}
-          setHastaCuanto={setHastaCuanto} 
+          setHastaCuanto={setHastaCuanto}
+          hastaCuanto={hastaCuanto} 
         />
       )}
     </div>

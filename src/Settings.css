@@ -12,42 +12,55 @@
 }
 
 .modal-content {
-  background-color: rgba(255, 0, 238, 0.37);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(61, 61, 61, 0.63);
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 80%;
   text-align: center;
-    font-family: "Asimovian", sans-serif;
+  font-family: "Asimovian", sans-serif;
   font-size: 30px;
   font-style: normal;
   color: white;
-
+border: 2px solid #8a8a8a;
 }
 
-.cerrar, .fullScreen{
+.cerrar {
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
   color: white;
   border: none;
-  border-radius: 50px;
-  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  border-radius: 40px;
+  background: black;
+  border: 2px solid #ffffff;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-select{
-    padding: 10px 20px; /* Aumenta el tamaño del select */
-  font-size: 18px; /* Fuente más grande */
-  border-radius: 8px; /* Bordes redondeados */
-  border: 2px solid #3498db; /* Borde con color */
-  background-color: #ffffff; /* Fondo blanco */
-  color: #333333; /* Color del texto */
+select {
+  padding: 8px 10px;
+  font-size: 18px;
+  border-radius: 15px;
+  border: 2px solid #ffffff;
+  font-weight: bold;
+  background-color: #000000;
+  color: #ffffff;
   cursor: pointer;
-  appearance: none; /* Elimina la apariencia predeterminada del select en algunos navegadores */
-  -webkit-appearance: none; /* Elimina la apariencia predeterminada en Safari */
-  -moz-appearance: none; /* Elimina la apariencia predeterminada en Firefox */
-  transition: all 0.3s ease; /* Transición suave para el efecto hover */
-  outline: none; /* Quita el contorno al hacer foco */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+
+.modal-content h2{
+  margin: 0;
+}
+
+.divPuntajes, .divCerrar{
+  margin: 5px;
 }
